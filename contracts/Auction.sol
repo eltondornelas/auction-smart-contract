@@ -1,5 +1,7 @@
 pragma solidity ^0.7.4;
 
+import "./Util.sol";
+
 contract Auction {
 
     enum State {
@@ -23,20 +25,12 @@ contract Auction {
         
     public {
         name = contractName;
-        targetAmount = etherToWei(targetAmountEth);
-        deadline = currentTime() + minutesToSeconds(durationInMin);
-        // deadline = now + minutesToSeconds(durationInMin);
-        // deadline = block.timestamp + minutesToSeconds(durationInMin);
+        targetAmount = Util.etherToWei(targetAmountEth);
+        // deadline = currentTime() + minutesToSeconds(durationInMin);  // no Curso utilizou assim, mas compilador não reconhece
+        // deadline = now + minutesToSeconds(durationInMin);  // deprecated
+        deadline = block.timestamp + Util.minutesToSeconds(durationInMin);
         beneficiary = beneficiaryAddress;
         state = State.Progress;
     }
 
-    function etherToWei(uint sumInEth) public pure returns(uint) {
-        return sumInEth * 1 ether;
-    }
-
-    function minutesToSeconds(uint timeInMin) public pure returns(uint) {
-        return timeInMin * 1 minutes;
-        // na blockchain grava o tempo em segundos
-    }
 }
