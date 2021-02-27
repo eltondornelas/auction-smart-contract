@@ -3,7 +3,7 @@ pragma solidity ^0.7.4;
 
 import "./Auction.sol";
 
-contract TesteAuction is Auction {
+contract AuctionTest is Auction {
     // herança
     uint time;
 

@@ -1,7 +1,7 @@
 .DS_Store
 .vs
 .vscode-test
-/package-lock.json
+./package-lock.json
 node_modules
 out
 tmp

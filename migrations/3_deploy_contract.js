@@ -6,6 +6,6 @@ module.exports = function(deployer) {
     "Auction Porsche",
     1,
     20,
-    "0x3f6b88fcabd9394e76d85d81b343a6221486fc297f38c0549809fc36e79be808"
+    "0xd2c43daaccc1fcb2061d5a58099c1195e24f1f89"
   );
 };

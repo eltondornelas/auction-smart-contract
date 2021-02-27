@@ -62,7 +62,7 @@ contract Auction {
         }
     }
 
-     function finishLeilao() public inState(State.Progress) {
+     function finishAuction() public inState(State.Progress) {
         require(!beforeDeadline(), "Nao e possivel terminar o leilao antes do deadline");
 
         if (!collected) {
@@ -97,7 +97,7 @@ contract Auction {
         return currentTime() < deadline;
     }
 
-       function currentTime() internal view returns(uint) {
+       function currentTime() virtual internal view returns(uint) {
         return block.timestamp;
     }
 

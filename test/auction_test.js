@@ -5,7 +5,7 @@ contract('Auction', function(accounts) {
 
     let contract;
     let contractCreator = accounts[0];
-    let beneficiario = accounts[1];
+    let beneficiary = accounts[1];
 
     const ONE_ETH = new BigNumber(1000000000000000000);  // 1 ether na unidade wei
     const ERROR_MSG = 'Returned error: VM Exception while processing transaction: revert';
@@ -15,7 +15,7 @@ contract('Auction', function(accounts) {
     const PAID_OUT_STATE = 3;
 
     beforeEach(async function() {
-        contract = await AuctionDeadline.new('funding', 1, 10, beneficiario, {from: contractCreator, gas: 2000000});
+        contract = await AuctionDeadline.new('funding', 1, 10, beneficiary, {from: contractCreator, gas: 2000000});
     });
 
     // it => é a validação da regra
@@ -26,14 +26,14 @@ contract('Auction', function(accounts) {
         let targetAmount = await contract.targetAmount.call()
         expect(ONE_ETH.isEqualTo(targetAmount)).to.equal(true);
 
-        let Deadline = await contract.Deadline.call()
-        expect(Deadline.toNumber()).to.equal(600);
+        let deadline = await contract.deadline.call()
+        expect(deadline.toNumber()).to.equal(600);
 
-        let actualBeneficiary = await contract.beneficiario.call()
-        expect(actualBeneficiary).to.equal(beneficiario);
+        let actualBeneficiary = await contract.beneficiary.call()
+        expect(actualBeneficiary).to.equal(beneficiary);
 
-        let estado = await contract.estado.call()
-        expect(estado.valueOf().toNumber()).to.equal(PROGRESS_STATE);
+        let state = await contract.state.call()
+        expect(state.valueOf().toNumber()).to.equal(PROGRESS_STATE);
     });
 
     it('Lances realizados.', async function() {
@@ -63,17 +63,17 @@ contract('Auction', function(accounts) {
         await contract.contribute({value: ONE_ETH, from: contractCreator});
         await contract.setCurrentTime(601);
         await contract.finishAuction();
-        let estado = await contract.estado.call();
+        let state = await contract.state.call();
 
-        expect(estado.valueOf().toNumber()).to.equal(SUCCEEDED_STATE);
+        expect(state.valueOf().toNumber()).to.equal(SUCCEEDED_STATE);
     });
 
     it('Leilão Falhou. Sem Vencedor.', async function() {
         await contract.setCurrentTime(601);
         await contract.finishAuction();
-        let estado = await contract.estado.call();
+        let state = await contract.state.call();
 
-        expect(estado.valueOf().toNumber()).to.equal(FAILED_STATE);
+        expect(state.valueOf().toNumber()).to.equal(FAILED_STATE);
     });
 
     it('Coletando dinheiro pago pelo vencedor.', async function() {
@@ -81,14 +81,14 @@ contract('Auction', function(accounts) {
         await contract.setCurrentTime(601);
         await contract.finishAuction();
 
-        let initAmount = await web3.eth.getBalance(beneficiario);
+        let initAmount = await web3.eth.getBalance(beneficiary);
         await contract.collect({from: contractCreator});
 
-        let newBalance = await web3.eth.getBalance(beneficiario);
+        let newBalance = await web3.eth.getBalance(beneficiary);
         let difference = newBalance - initAmount;
         expect(ONE_ETH.isEqualTo(difference)).to.equal(true);
 
-        let fundingState = await contract.estado.call()
+        let fundingState = await contract.state.call()
         expect(fundingState.valueOf().toNumber()).to.equal(PAID_OUT_STATE);
     });
 
