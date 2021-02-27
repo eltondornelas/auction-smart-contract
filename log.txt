@@ -1,0 +1,93 @@
+# log after truffle migrate --network localtest
+
+Starting migrations...
+======================
+> Network name:    'localtest'
+> Network id:      5777
+> Block gas limit: 6721975 (0x6691b7)
+
+
+1_initial_migration.js
+======================
+
+   Deploying 'Migrations'
+   ----------------------
+   > transaction hash:    0x4818cf651502e97b8590c8985ba16d4b7bd9088530bf12fe552f0d82722c6cc9
+   > Blocks: 0            Seconds: 0
+   > contract address:    0xE913884bd95b989Cdd0cc1d475979FF06719ace2
+   > block number:        2
+   > block timestamp:     1614432259
+   > account:             0x22B41E826ce49C0414b210e8eb6758b178b0fbc5
+   > balance:             99.9814089
+   > gas used:            186963 (0x2da53)
+   > gas price:           20 gwei
+   > value sent:          0 ETH
+   > total cost:          0.00373926 ETH
+
+
+   > Saving migration to chain.
+   > Saving artifacts
+   -------------------------------------
+   > Total cost:          0.00373926 ETH
+
+
+2_deploy_util.js
+================
+
+   Deploying 'Util'
+   ----------------
+   > transaction hash:    0x0726f880ff045ccd0267126a1be59416bd009879d6aaabd3ca71aaffc03abbd4
+   > Blocks: 0            Seconds: 0
+   > contract address:    0x8A2014EAa692f1bE0674c1AF9a529727d27Ac8ae
+   > block number:        4
+   > block timestamp:     1614432259
+   > account:             0x22B41E826ce49C0414b210e8eb6758b178b0fbc5
+   > balance:             99.97829026
+   > gas used:            113597 (0x1bbbd)
+   > gas price:           20 gwei
+   > value sent:          0 ETH
+   > total cost:          0.00227194 ETH
+
+
+   Linking
+   -------
+   * Contract: Auction <--> Library: Util (at address: 0x8A2014EAa692f1bE0674c1AF9a529727d27Ac8ae)
+
+   Linking
+   -------
+   * Contract: AuctionTest <--> Library: Util (at address: 0x8A2014EAa692f1bE0674c1AF9a529727d27Ac8ae)
+
+   > Saving migration to chain.
+   > Saving artifacts
+   -------------------------------------
+   > Total cost:          0.00227194 ETH
+
+
+3_deploy_contract.js
+====================
+
+   Deploying 'Auction'
+   -------------------
+   > transaction hash:    0x0edd7c4853cbfb4e8a7a139c347c8d2b2c41d67f77aaed3cdfbf103b3b714880
+   > Blocks: 0            Seconds: 0
+   > contract address:    0x27059D40116AEc546CC7ba931D13D2f2a5B95713
+   > block number:        6
+   > block timestamp:     1614432260
+   > account:             0x22B41E826ce49C0414b210e8eb6758b178b0fbc5
+   > balance:             99.95895822
+   > gas used:            939267 (0xe5503)
+   > gas price:           20 gwei
+   > value sent:          0 ETH
+   > total cost:          0.01878534 ETH
+
+
+   > Saving migration to chain.
+   > Saving artifacts
+   -------------------------------------
+   > Total cost:          0.01878534 ETH
+
+
+Summary
+=======
+> Total deployments:   3
+> Final cost:          0.02479654 ETH
